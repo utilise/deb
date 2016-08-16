@@ -11,15 +11,19 @@
   "license": "pemrouz.mit-license.org",
   "devDependencies": {
     "chai": "^2.3.0",
-    "utilise.client": "*",
     "coveralls": "^2.11.2",
     "istanbul": "^0.3.13",
     "mocha": "^2.2.4",
-    "mocha-lcov-reporter": "0.0.2"
+    "mocha-lcov-reporter": "0.0.2",
+    "utilise.client": "*",
+    "utilise.keys": "0.0.3"
   },
   "dependencies": {
+    "utilise.identity": "0.0.1",
     "utilise.is": "*",
+    "utilise.key": "0.0.8",
     "utilise.owner": "*",
+    "utilise.split": "0.0.1",
     "utilise.to": "*"
   }
 }
