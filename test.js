@@ -107,13 +107,24 @@ describe('deb', function() {
   })
 
   it('should work in with querystring', function() {
-    init('[foo/bar],foo/baz', function(){
+    init('?debug=[foo/bar],foo/baz', function(){
       expect(deb('[foo]')('bar')).to.equal('bar')
       expect(reg('[foo]', ' bar').test(output)).to.not.be.ok
       expect(deb('[foo/baz]')('bar')).to.equal('bar')
       expect(reg('[foo/baz]', ' bar').test(output)).to.be.ok
       expect(deb('[foo/bar]')('bar')).to.equal('bar')
       expect(reg('[foo/bar]', ' bar').test(output)).to.be.ok
+    }, true)
+  })
+
+  it('should work with no querystring', function() {
+    init('', function(){
+      expect(deb('[foo]')('bar')).to.equal('bar')
+      expect(reg('[foo]', ' bar').test(output)).to.not.be.ok
+      expect(deb('[foo/baz]')('bar')).to.equal('bar')
+      expect(reg('[foo/baz]', ' bar').test(output)).to.not.be.ok
+      expect(deb('[foo/bar]')('bar')).to.equal('bar')
+      expect(reg('[foo/bar]', ' bar').test(output)).to.not.be.ok
     }, true)
   })
 
@@ -144,7 +155,7 @@ function init(DEBUG, fn, browser){
   key('location.search', '')(owner)
   key('process.env.DEBUG', '')(owner)
   browser 
-    ? key('location.search', '?debug=' + DEBUG)(owner)
+    ? key('location.search', DEBUG)(owner)
     : key('process.env.DEBUG', DEBUG)(owner)
   deb = require('./')
 
